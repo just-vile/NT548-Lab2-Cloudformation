@@ -1,0 +1,46 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Create EC2 Instances in Public and Private Subnets
+
+Parameters:
+  PublicSubnetId:
+    Type: String
+    Description: Public Subnet Id
+  PrivateSubnetId:
+    Type: String
+    Description: Private Subnet Id
+  PublicSecurityGroupId:
+    Type: String
+    Description: Public EC2 Security Group Id
+  PrivateSecurityGroupId:
+    Type: String
+    Description: Private EC2 Security Group Id
+  KeyName:
+    Type: String
+    Description: Key pair name to SSH into EC2 instances
+
+Resources:
+  PublicEC2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: t2.micro
+      KeyName: !Ref KeyName
+      SecurityGroupIds:
+        - !Ref PublicSecurityGroupId
+      SubnetId: !Ref PublicSubnetId
+      ImageId: ami-0866a3c8686eaeeba
+      Tags:
+        - Key: Name
+          Value: PublicEC2Instance
+
+  PrivateEC2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: t2.micro
+      KeyName: !Ref KeyName
+      SecurityGroupIds:
+        - !Ref PrivateSecurityGroupId
+      SubnetId: !Ref PrivateSubnetId
+      ImageId: ami-0866a3c8686eaeeba
+      Tags:
+        - Key: Name
+          Value: PrivateEC2Instance
