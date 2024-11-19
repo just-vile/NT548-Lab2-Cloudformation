@@ -10,11 +10,14 @@ Steps to run this repo:
    git push
    ```
 6. Create a CodeBuild project:
+```sh
    - Name: Cloudformation-validation
    - Source: AWS CodeCommit
    - Repository: Group21-Lab2. Branch: Master
    - Click 'Use buildspec file
+```
 7. Create a CodePipeline:
+```sh
   - Name: Group21-Pipeline
   - All other options set as Default
   - Source stage: AWS CodeCommit you just created
@@ -25,4 +28,5 @@ Steps to run this repo:
       + Action mode: Create or update stack
       + Stack name: Group21-Stack
       + Template: Artifact name: BuildArtifact; Filename: template.yaml
+```
 Then, you should have your own AWS Infrastructure with this pipeline.
